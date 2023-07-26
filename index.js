@@ -14,7 +14,7 @@ const menuRoutes = require('./routes/Menu');
 const driverRoutes = require('./routes/Driver');
 
 app.use(cors({
-    origin: ['http://localhost:3000'],
+    origin: [process.env.MYSQL_ADDON_HOST],
     methods:['POST','GET'],
     credentials:true
 }));
