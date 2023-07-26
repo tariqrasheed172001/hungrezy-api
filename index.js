@@ -14,7 +14,7 @@ const menuRoutes = require('./routes/Menu');
 const driverRoutes = require('./routes/Driver');
 
 app.use(cors({
-    origin: [process.env.MYSQL_ADDON_HOST],
+    origin: 'https://food-delivery-lac.vercel.app',
     methods:['POST','GET'],
     credentials:true
 }));
