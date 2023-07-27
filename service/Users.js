@@ -39,11 +39,14 @@ const QueryLogin = async (req,res) => {
 
             // jwt token
             const name = user.name;
-            
+
             console.log(name)
             const token = jwt.sign({ name }, process.env.JWT_SECRET, { expiresIn: '1d' });
             console.log(token);
-            res.cookie('token', token);
+            res.cookie('token', token,{
+                httpOnly: true, // The cookie cannot be accessed through JavaScript (for added security)
+                secure: true, // The cookie will be sent only over HTTPS (recommended for production)
+              });
             
             
 
