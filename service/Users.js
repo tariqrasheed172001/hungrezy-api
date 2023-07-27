@@ -39,9 +39,13 @@ const QueryLogin = async (req,res) => {
 
             // jwt token
             const name = user.name;
-
+            
+            console.log(name)
             const token = jwt.sign({ name }, process.env.JWT_SECRET, { expiresIn: '1d' });
+            console.log(token);
             res.cookie('token', token);
+            
+            
 
             return res.status(200).json({ user, message: 'Successfully logged in' });
         }else{
