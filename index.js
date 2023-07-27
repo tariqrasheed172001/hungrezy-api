@@ -13,8 +13,8 @@ const restaurantRoutes = require('./routes/Restaurants');
 const menuRoutes = require('./routes/Menu');
 const driverRoutes = require('./routes/Driver');
 
-app.use(cors({
-    origin: 'https://food-delivery-lac.vercel.app',
+app.use("*",cors({
+    origin: true,
     methods:['POST','GET'],
     credentials:true
 }));
