@@ -1,5 +1,5 @@
 
-const {QueryAllUsers,QueryLogin,QueryRegister,QueryVerification,QueryLogout,doesEmailExist} = require('../service/Users');
+const {QueryAllUsers,QueryLogin,QueryRegister,doesEmailExist} = require('../service/Users');
 
 const GetAllUsers = (req,res) => {
     QueryAllUsers(req,res);
@@ -28,12 +28,4 @@ const CheckExistingEmail = async(req,res) => {
       }
 }
 
-const Verification = (req,res) =>{
-    QueryVerification(req,res);
-}
-
-const Logout = (req,res) => {
-    QueryLogout(req,res);
-}
-
-module.exports = {GetAllUsers,Login,Register,Verification,Logout,CheckExistingEmail};
+module.exports = {GetAllUsers,Login,Register,CheckExistingEmail};

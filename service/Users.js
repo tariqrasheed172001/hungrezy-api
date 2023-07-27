@@ -74,14 +74,6 @@ const QueryRegister = async (req,res) => {
     }
 }
 
-const QueryVerification = (req,res) =>{
-    return res.send({Status:'Success',name: req.name});
-}
-
-const QueryLogout = (req,res) => {
-    res.clearCookie('token');
-    return res.json({status:"success"});
-}
 
 const doesEmailExist = async (req,res) => {
     const email = req.body.email;
@@ -98,4 +90,4 @@ const doesEmailExist = async (req,res) => {
   }
 
 
-module.exports = {QueryAllUsers,QueryLogin,QueryRegister,QueryVerification,QueryLogout,doesEmailExist};
+module.exports = {QueryAllUsers,QueryLogin,QueryRegister,doesEmailExist};
