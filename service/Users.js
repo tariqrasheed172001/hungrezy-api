@@ -43,14 +43,10 @@ const QueryLogin = async (req,res) => {
             console.log(name)
             const token = jwt.sign({ name }, process.env.JWT_SECRET, { expiresIn: '1d' });
             console.log(token);
-            res.cookie('token', token,{
-                httpOnly: true, // The cookie cannot be accessed through JavaScript (for added security)
-                secure: true, // The cookie will be sent only over HTTPS (recommended for production)
-              });
-            
+            // res.cookie('token', token);
             
 
-            return res.status(200).json({ user, message: 'Successfully logged in' });
+            return res.status(200).json({token,user,message: 'Successfully logged in' });
         }else{
             console.log('Incorrect password. User cannot log in.');
             return res.status(201).json({ user, message: 'Wrong email or password' });
