@@ -12,7 +12,8 @@ const otpRoutes = require('./routes/Otp');
 const restaurantRoutes = require('./routes/Restaurants');
 const menuRoutes = require('./routes/Menu');
 const driverRoutes = require('./routes/Driver');
-
+// sdkfjalkd
+// asdf
 app.use("*",cors({
     origin: true,
     methods:['POST','GET'],
