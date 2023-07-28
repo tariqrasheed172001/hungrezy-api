@@ -99,7 +99,7 @@ const generateResetPasswordLink = async (req, res) => {
       expiresIn: "5m",
     });
 
-    const link = `http://localhost:3000/reset-password/${oldUser.user_id}/${token}`;
+    const link = `${Front_end_url}/reset-password/${oldUser.user_id}/${token}`;
     console.log(link);
     res.json({ link: link });
 
