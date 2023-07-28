@@ -118,7 +118,7 @@ var transporter = nodemailer.createTransport({
     to: `${email}`,
     subject: 'Reset your Hungrezy password',
     text: `You say you forgot your password? Let's get you a new one
-    Please click the link below to get a new password. ${link}`
+    Please click the link below to get a new password. (Given link is only valid for 5 minutes)  ${link}`
   };
   
   transporter.sendMail(mailOptions, function(error, info){
