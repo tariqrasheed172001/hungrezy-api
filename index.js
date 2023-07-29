@@ -28,5 +28,5 @@ app.use(restaurantRoutes);
 app.use(menuRoutes);
 app.use(driverRoutes);
 
-app.listen(process.env.MYSQL_ADDON_PORT);
-// app.listen(8000);
+// app.listen(process.env.MYSQL_ADDON_PORT);
+app.listen(8000);
