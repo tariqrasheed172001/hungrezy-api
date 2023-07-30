@@ -3,6 +3,7 @@ require("dotenv").config();
 const nodemailer = require("nodemailer");
 
 const send_otp_to_mail = (email,code) => {
+  // sending code to user mail
   if (!email) {
     return res.status(400).json({ error: "Email is required." });
   }
