@@ -11,8 +11,8 @@ function generateOTP(length = 4) {
 }
 
 // Function to send OTP via Twilio SMS
-function sendOTP(phoneNumber, message) {
-  const otp = generateOTP();
+function sendOTP(phoneNumber, message,code) {
+  const otp = code
   client.messages.create({
     to: phoneNumber,
     from: process.env.TWILIO_PHONE_NUMBER,

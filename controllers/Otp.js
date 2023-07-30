@@ -1,7 +1,8 @@
-const {TwilioOtp} = require('../service/Otp');
+const { TwilioOtp } = require("../service/Otp");
 
-const sendOtp = (req,res) =>{
-    TwilioOtp(req,res);
-}
+const sendOtp = (req, res) => {
+  TwilioOtp(req, res);
+};
 
-module.exports = {sendOtp};
+
+module.exports = { sendOtp };
