@@ -103,32 +103,29 @@ const generateResetPasswordLink = async (req, res) => {
     console.log(link);
     res.json({ link: link });
 
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "rasheedhadiq@gmail.com",
+        pass: "excyclmqkdgnajiq",
+      },
+    });
 
+    var mailOptions = {
+      from: "rasheedhadiq@gmail.com",
+      to: `${email}`,
+      subject: "Reset your Hungrezy password",
+      text: `You say you forgot your password? Let's get you a new one
+    Please click the link below to get a new password. (Given link is only valid for 5 minutes)  ${link}`,
+    };
 
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'rasheedhadiq@gmail.com',
-      pass: 'excyclmqkdgnajiq'
-    }
-  });
-  
-  var mailOptions = {
-    from: 'rasheedhadiq@gmail.com',
-    to: `${email}`,
-    subject: 'Reset your Hungrezy password',
-    text: `You say you forgot your password? Let's get you a new one
-    Please click the link below to get a new password. (Given link is only valid for 5 minutes)  ${link}`
-  };
-  
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-    }
-  });
-
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
   } catch (error) {
     console.error("Error during reseting password:", error);
     return res.status(500).json({ message: "Internal server error" });
