@@ -1,13 +1,13 @@
-const {QueryGetRestaurants,QueryPostRestaurants} = require('../service/Restaurants');
+const {QueryGetRestaurants,addRestaurant} = require('../service/Restaurants');
 
 const GetRestaurants = (req,res) =>{
     QueryGetRestaurants(req,res);
 }
 
-const PostRestaurants = (req,res) =>{
-    QueryPostRestaurants(req,res);
+const AddRestaurant = (req,res) =>{
+    addRestaurant(req,res);
 }
 
 
-module.exports = {GetRestaurants,PostRestaurants};
+module.exports = {GetRestaurants,AddRestaurant};
 
