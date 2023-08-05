@@ -17,10 +17,12 @@ const addRestaurant = async (req, res) => {
 
   try {
         // Create a new restaurant
+        console.log(data.restaurant.user_id);
         const restaurant = await Restaurants.create({
           name: data.restaurant.name,
           address: data.restaurant.address,
           phone_number: data.restaurant.phone,
+          user_id: data.restaurant.user_id,
         });
 
         console.log(restaurant.restaurant_id);
@@ -40,9 +42,9 @@ const addRestaurant = async (req, res) => {
           working_days: data.timings.working_days, // Storing working days as a comma-separated string
           restaurant_id: restaurant.restaurant_id, // Assign the foreign key (RestaurantId) to link the timings to the restaurant
         });
-        
-        console.log('Restaurant data stored successfully!');
-        res.json("Restaurant data stored successfully!");
+
+        console.log({message:'Restaurant data stored successfully!'});
+        res.json({message:"Restaurant successfully added!"});
   } catch (error) {
     console.error('Error storing restaurant data:', error);
     res.status(500).json({ message: "Internal server error" });

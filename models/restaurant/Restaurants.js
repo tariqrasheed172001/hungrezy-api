@@ -28,4 +28,12 @@ const Restaurants = sequelize.define(
   }
 );
 
+const {User} = require('../User');
+
+// Set up the association: Menu belongs to a Restaurant
+Restaurants.belongsTo(User, {
+  foreignKey: "user_id", // Specify the foreign key column name
+  onDelete: 'CASCADE',
+});
+
 module.exports = { Restaurants };
