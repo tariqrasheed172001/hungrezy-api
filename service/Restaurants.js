@@ -2,6 +2,25 @@ const { Restaurants } = require("../models/restaurant/Restaurants");
 const { Owners } = require('../models/restaurant/Owners');
 const { Timings } = require('../models/restaurant/Timings');
 
+const getRestaurant = async (req,res) => {
+  const {user_id} = req.body;
+  console.log(user_id);
+  try {
+    const restaurant = await Restaurants.findOne({where:{user_id}});
+    if(!restaurant){
+      res.status(202).json("user has no restaurant");
+    }
+    const {restaurant_id} = restaurant
+    const owner = await Owners.findOne({where:{restaurant_id}});
+    const timings = await Timings.findOne({where:{restaurant_id}});
+
+    res.json({restaurant,owner,timings});
+  } catch (error) {
+    console.error("error fetching a restaurant",error);
+    res.status(500).json({message: "Internal server error"});
+  }
+}
+
 const QueryGetRestaurants = async (req, res) => {
   try {
     const restaurants = await Restaurants.findAll();
@@ -51,4 +70,4 @@ const addRestaurant = async (req, res) => {
   }
 };
 
-module.exports = { QueryGetRestaurants, addRestaurant };
+module.exports = { QueryGetRestaurants, addRestaurant,getRestaurant };
