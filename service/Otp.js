@@ -78,20 +78,5 @@ const send_owner_email_otp = (req,res) => {
   res.json({ message: "Code sent successfully,check your inbox.", otp });
 }
 
-const send_owner_phone_otp = (req,res) => {
-  const { phone } = req.body;
 
-  if (!phone) {
-    return res
-      .status(400)
-      .json({ error: "Phone number and message are required." });
-  }
-
-  const code = generateOTP(3);
-
-  const otp = sendOTP(phone, "Verification from Hungrezy", code);
-
-  res.json({ message: "OTP sent successfully.", otp });
-}
-
-module.exports = { TwilioOtp,send_restaurant_contact_otp,send_owner_email_otp,send_owner_phone_otp };
+module.exports = { TwilioOtp,send_restaurant_contact_otp,send_owner_email_otp };
