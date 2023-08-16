@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('../connection');
 
-const {Restaurants} = require('./Restaurants');
+const {Restaurants} = require('./restaurant/Restaurants')
 
 const Menu = sequelize.define('Menu',{
     menu_id:{

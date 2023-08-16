@@ -2,7 +2,8 @@ const { sendOTP, generateOTP } = require("../otpGenerator");
 require("dotenv").config();
 const nodemailer = require("nodemailer");
 
-const send_otp_to_mail = (email,code) => {
+const send_otp_to_mail = (req,res,email,code) => {
+  // sending code to user mail
   if (!email) {
     return res.status(400).json({ error: "Email is required." });
   }
@@ -48,10 +49,34 @@ const TwilioOtp = (req, res) => {
   const otp = sendOTP(phoneNumber, "Verification from Hungrezy", code);
 
    // sending same code to email
-   send_otp_to_mail(email,code);
+   send_otp_to_mail(req,res,email,code);
   
   // sending same code to front end.
   res.json({ message: "OTP sent successfully.", otp });
 };
 
-module.exports = { TwilioOtp };
+const send_restaurant_contact_otp = (req,res) => {
+  const { phone } = req.body;
+
+  if (!phone) {
+    return res
+      .status(400)
+      .json({ error: "Phone number and message are required." });
+  }
+
+  const code = generateOTP(3);
+
+  const otp = sendOTP(phone, "Verification from Hungrezy", code);
+
+  res.json({ message: "OTP sent successfully.", otp });
+}
+
+const send_owner_email_otp = (req,res) => {
+  const { email } = req.body;
+  const otp = generateOTP(3);
+  send_otp_to_mail(req,res,email,otp);
+  res.json({ message: "Code sent successfully,check your inbox.", otp });
+}
+
+
+module.exports = { TwilioOtp,send_restaurant_contact_otp,send_owner_email_otp };
