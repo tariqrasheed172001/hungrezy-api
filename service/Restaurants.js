@@ -3,8 +3,7 @@ const { Owners } = require("../models/restaurant/Owners");
 const { Timings } = require("../models/restaurant/Timings");
 const { BankDetails } = require("../models/restaurant/BankDetails");
 
-
-const updateTimings = async (req,res) => {
+const updateTimings = async (req, res) => {
   const data = req.body;
   try {
     await Timings.upsert({
@@ -19,9 +18,9 @@ const updateTimings = async (req,res) => {
     console.error("error while saving Timings", error);
     res.status(500).json({ message: "Internal server error" });
   }
-}
+};
 
-const updateOwnerDetials = async (req,res) => {
+const updateOwnerDetials = async (req, res) => {
   const data = req.body;
   try {
     await Owners.upsert({
@@ -36,7 +35,7 @@ const updateOwnerDetials = async (req,res) => {
     console.error("error while saving Owner details", error);
     res.status(500).json({ message: "Internal server error" });
   }
-}
+};
 
 const updateInformation = async (req, res) => {
   const data = req.body;
@@ -77,17 +76,18 @@ const getRestaurant = async (req, res) => {
   console.log(user_id);
   try {
     const restaurant = await Restaurants.findOne({ where: { user_id } });
-    if (!restaurant) {
+    if (restaurant === null) {
       res.status(202).json("user has no restaurant");
-    }
-    const { restaurant_id } = restaurant;
-    const owner = await Owners.findOne({ where: { restaurant_id } });
-    const timings = await Timings.findOne({ where: { restaurant_id } });
-    const bank_details = await BankDetails.findOne({
-      where: { restaurant_id },
-    });
+    } else {
+      const { restaurant_id } = restaurant;
+      const owner = await Owners.findOne({ where: { restaurant_id } });
+      const timings = await Timings.findOne({ where: { restaurant_id } });
+      const bank_details = await BankDetails.findOne({
+        where: { restaurant_id },
+      });
 
-    res.json({ restaurant, owner, timings, bank_details });
+      res.json({ restaurant, owner, timings, bank_details });
+    }
   } catch (error) {
     console.error("error fetching a restaurant", error);
     res.status(500).json({ message: "Internal server error" });
