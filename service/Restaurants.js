@@ -128,7 +128,6 @@ const addRestaurant = async (req, res) => {
 
   try {
     // Create a new restaurant
-    console.log(data.restaurant.user_id);
     const restaurant = await Restaurants.create({
       name: data.restaurant.name,
       address: data.restaurant.address,

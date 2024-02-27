@@ -12,6 +12,7 @@ const otpRoutes = require('./routes/Otp');
 const restaurantRoutes = require('./routes/Restaurants');
 const menuRoutes = require('./routes/Menu');
 const driverRoutes = require('./routes/Driver');
+const foodRoutes = require('./routes/Food');
 app.use("*",cors({
     origin: true,
     methods:['POST','GET'],
@@ -27,6 +28,7 @@ app.use(otpRoutes);
 app.use(restaurantRoutes);
 app.use(menuRoutes);
 app.use(driverRoutes);
+app.use(foodRoutes);
 
-app.listen(process.env.MYSQL_ADDON_PORT);
-// app.listen(8000);
+// app.listen(process.env.MYSQL_ADDON_PORT);
+app.listen(8000);
