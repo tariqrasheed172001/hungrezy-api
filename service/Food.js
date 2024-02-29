@@ -1,8 +1,11 @@
 const { Food } = require("../models/Food/Food");
 const { FoodImages } = require("../models/Food/FoodImages");
+const cloudinary = require("../utils/cloudinary");
 
 const addFoodItem = async (req, res) => {
   const data = req.body;
+
+  const Images = data.Images;
 
   try {
     // Create a new food item
@@ -14,9 +17,27 @@ const addFoodItem = async (req, res) => {
       restaurant_id: data.restaurant_id,
     });
 
+    // putting images to cloudinary and getting ImageUrls(pointer) from cloudinary;
+    const imageUrls = [];
+
+    // Loop through the Images array
+    for (const image of Images) {
+      try {
+        // Upload the image to Cloudinary
+        const result = await cloudinary.uploader.upload(image, {
+          folder: "foodImages",
+        });
+        // Extract the URL from the Cloudinary response and push it to imageUrls array
+        imageUrls.push(result.secure_url);
+      } catch (error) {
+        console.error(`Error uploading image ${image}:`, error);
+        // Handle errors if needed
+      }
+    }
+
     // Insert image URLs into FoodImages table
-    if (data.imageUrls && Array.isArray(data.imageUrls)) {
-      const imagePromises = data.imageUrls.map(async (imageUrl) => {
+    if (imageUrls && Array.isArray(imageUrls)) {
+      const imagePromises = imageUrls.map(async (imageUrl) => {
         await FoodImages.create({
           food_id: foodItem.food_id,
           image_url: imageUrl,
